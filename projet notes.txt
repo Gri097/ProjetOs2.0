@@ -1,0 +1,128 @@
+////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////PROJET OS/////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+int shmid = shmeget(77,20 * si z (voit),0666)
+voitures = shmat (shmid, 0,0))
+
+
+
+
+
+getPID avant de commencer les fork
+quand on fork on a plusieurs process mais on sait pas lesquels tourne
+mettre la structure dans un fichier.h
+
+
+
+pour mettre des boolean il y a un include à rajouter
+
+forker 20 fois => utilise le meme i de la boucle
+
+for(i = 0; i < 20; i++)
+{
+if (fork() == 0)
+	/*voiture*/
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////fICHER.H à enregistrer en .h/////////////////////////////
+
+#ifndef  H_TEST
+#define H_TEST
+
+typedef struct Voiture Voiture;
+struct Voiture
+{
+int s1;
+int s2;
+};
+
+Voiture Voiture1, Voiture2;
+
+#endif
+
+////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////Affichage après avoir récupérer les infos/////////////////
+
+#include "test.h" (sans les chevrons)
+
+dans le premier père :
+
+int main(){
+Voiture2.s1 =20;
+Voiture1.s1 =15;
+
+printf("%d" \n, Voiture1.s1);
+printf("%d", Voiture1.s1);
+
+////////////////////////////////////////////////////////////////////////////////
+
+///////////// bout de code qui permet de créer un temps aléatoire //////////////
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main()
+{
+    srand(time(0));
+    double pEntiere = (rand() % 15) + 35;
+    double pDecimale = (rand() % 999);
+    pDecimale /= 1000;
+    double temps = pEntiere + pDecimale;
+    printf("%f", temps);
+
+    return 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////// Structure voiture //////////////////////////////////
+
+struct voiture
+{
+	int numero;
+	double tS1, tS2, tS3;
+	bool stand, out;
+}
+
+int main()
+{
+	int[20] = {7,99,5,16,8,20,4,55,10,26,44,77,11,18,23,33,3,27};
+
+	return 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+    printf("_______________________________________________________________________\n");
+    printf("|                     Simulation Grand Prix de F1                     |\n");
+    printf("|_____________________________________________________________________|\n");
+    printf("| Voiture | Section 1 | Section 2 | Section 3 |Temps Total| Pit | Out |\n");
+    printf("|---------|-----------|-----------|-----------|-----------|-----|-----|\n");
+    printf("|   %d    |   %.2f\"  |   %.2f\"  |   %.2f\"  |   %.2f\"  |  %d  |  %d  |\n",Voiture1.id, Voiture1.s1, Voiture1.s2, Voiture1.s3, Voiture1.tempsTotal, Voiture1.p, Voiture1.boolean_out);
+    printf("|---------|-----------|-----------|-----------|-----------|-----|-----|\n");
+    printf("|   %d    |   %.2f\"  |   %.2f\"  |   %.2f\"  |   %.2f\"  |  %d |  %d |\n",Voiture2.id, Voiture2.s1, Voiture2.s2, Voiture2.s3, Voiture2.tempsTotal, Voiture2.p, Voiture2.boolean_out);
+    printf("|---------|-----------|-----------|-----------|-----------|-----|-----|\n");
+    printf("|  Best   | Section 1 | Section 2 | Section 3 |Temps Total|\n");
+    printf("|---------|-----------|-----------|-----------|-----------|\n");
+    printf("          |   %.2f\"  |   %.2f\"  |   %.2f\"  |   %.2f\"  |\n",Voiture1.s1, Voiture1.s2, Voiture1.s3, Voiture1.tempsTotal);
+    printf("          |-----------|-----------|-----------|-----------|\n");
+
+////////////////////////////////////////////////////////////////////////////////
+
+		Mémoire partagée :
+
+
+		un programme crée une mémoire partagée et inscrit une structure dans cette mémoire.
+		l'autre programme attache cette mémoire partagée à son processus pour en lire le contenu.
+
+		ID : identificateur du segment de mémoire partagée associé
+
+		http://eavr.u-strasbg.fr/~christophe/cours/fip2/slides_shmem.pdf
+
+		utiliser http://manpagesfr.free.fr/man/man3/ftok.3.html pour créer la clé.
+		(clé : http://jean-luc.massat.perso.luminy.univ-amu.fr/ens/docs/IPC.html)
