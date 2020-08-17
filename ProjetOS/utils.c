@@ -116,8 +116,11 @@ void docRecap(struct MemoirePartagee *tabVoitures, int choix){
         case 0:
             fichier = fopen("RecapEssai1.txt", "a");
             break;
-        case 1:
+	case 3:
             fichier = fopen("RecapEssai2.txt", "a");
+            break;
+        case 1:
+            fichier = fopen("RecapEssai3.txt", "a");
             break;
         case 20:
             fichier = fopen("RecapQualifications1.txt", "a");
@@ -149,8 +152,11 @@ void docRecap(struct MemoirePartagee *tabVoitures, int choix){
             case 0:
                 fprintf(fichier,"|             ESSAIS 1            |\n");
                 break;
-            case 1:
+	    case 3:
                 fprintf(fichier,"|             ESSAIS 2            |\n");
+                break;
+            case 1:
+                fprintf(fichier,"|             ESSAIS 3            |\n");
                 break;
             case 20:
                 fprintf(fichier,"|         QUALIFICATIONS 1        |\n");
@@ -165,7 +171,7 @@ void docRecap(struct MemoirePartagee *tabVoitures, int choix){
                 fprintf(fichier,"|          COURSE FINALE          |\n");
                 break;
         }
-        if (choix < 3) {
+        if (choix < 4) {
             choix = 20;
         }
         fprintf(fichier,"|_________________________________|\n");

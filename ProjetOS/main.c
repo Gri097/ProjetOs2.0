@@ -59,10 +59,11 @@ void essaisEtQualifications(struct MemoirePartagee *tabVoitures, int i, double t
   while (tempsEnCours < tempsTotal && v.out == 0) {
     tempsEnCours += calculTour(pointeurV);
     tabVoitures->tableauV[i] = v;
-    if (tempsTotal == 5400) {
+    if (tempsTotal == 5400 || tempsTotal == 3600) {
+	sleep(1);
     }
     else{
-      sleep(2);
+	sleep(2);
     }
   }
   tabVoitures->nbVoituresFini += 1;
@@ -86,8 +87,11 @@ void afficheTab(struct MemoirePartagee *tabVoitures, int choix){
     case 0:
     printf("|             ESSAIS 1            |\n");
     break;
-    case 1:
+    case 3:
     printf("|             ESSAIS 2            |\n");
+    break;
+    case 1:
+    printf("|             ESSAIS 3            |\n");
     break;
     case 20:
     printf("|         QUALIFICATIONS 1        |\n");
@@ -102,7 +106,7 @@ void afficheTab(struct MemoirePartagee *tabVoitures, int choix){
     printf("|          COURSE FINALE          |\n");
     break;
   }
-  if (choix < 3) {
+  if (choix < 4) {
     choix = 20;
   }
   printf("|_________________________________|\n");
@@ -168,7 +172,7 @@ void triQualifications(struct MemoirePartagee *tabVoitures, int choix){
 
 void fonctionPere(struct MemoirePartagee *tabVoitures, int choix){
   int calculNbFini;
-  if(choix > 3){
+  if(choix > 4){
     calculNbFini = choix;
   }
   else{
@@ -178,10 +182,10 @@ void fonctionPere(struct MemoirePartagee *tabVoitures, int choix){
     msleep(500);
     afficheTab(tabVoitures, choix);
   }
-  if (choix > 3) {
+  if (choix > 4) {
     triQualifications(tabVoitures, choix);
   }
-  docRecap(tabVoitures, choix);
+  docRecap(tabVoitures, choix); //Pour avoir un document récapitulatif du tableau final
 }
 
 //Lance le programme
@@ -195,25 +199,19 @@ int main(int argc, char *argv[]){
   while(choix != 10){
     tabVoitures->nbVoituresFini = 0;
 
-    printf("Que voulez-vous faire? \n 0 : pour lancer les essais 1 \n 1 : pour lancer les essais 2 \n 2 : pour lancer les qualifs 1 \n 3 : pour lancer les qualifs 2 \n 4 : pour lancer les qualifs 3 \n 5 : pour lancer la course finale \n 10 : pour quitter le programme \n");
+   	printf("Que voulez-vous faire? \n");
+	printf("0 : pour lancer les essais 1 (P1)  \n");
+	printf("6 : pour lancer les essais 2 (P2)  \n");
+	printf("1 : pour lancer les essais 3 (P3)  \n");
+	printf("2 : pour lancer les qualifs 1 (Q1) \n");
+	printf("3 : pour lancer les qualifs 2 (Q2) \n");
+	printf("4 : pour lancer les qualifs 3 (Q3) \n");
+	printf("5 : pour lancer la course finale   \n");
+	printf("10 : pour quitter le programme \n");
     scanf("%d", &choix);
 
     switch(choix){
-      case 0 :
-      for(int i = 0; i < 20; i++){
-        int pid = fork();
-        if (pid < 0) {
-          perror("ça forke pas\n");
-          return -1;
-        }
-        else if (pid == 0) {
-          srand(getpid());
-          essaisEtQualifications(tabVoitures, i, 3600);
-        }
-      }
-      fonctionPere(tabVoitures, 0);
-      break;
-      case 1 :
+      case 0 : // P1 -> 1h30
       for(int i = 0; i < 20; i++){
         int pid = fork();
         if (pid < 0) {
@@ -223,6 +221,34 @@ int main(int argc, char *argv[]){
         else if (pid == 0) {
           srand(getpid());
           essaisEtQualifications(tabVoitures, i, 5400);
+        }
+      }
+      fonctionPere(tabVoitures, 0); // C'est le père qui affiche
+      break;
+      case 6 : // P2 -> 1h30
+      for(int i = 0; i < 20; i++){
+        int pid = fork();
+        if (pid < 0) {
+          perror("ça forke pas\n");
+          return -1;
+        }
+        else if (pid == 0) {
+          srand(getpid());
+          essaisEtQualifications(tabVoitures, i, 5400);
+        }
+      }
+      fonctionPere(tabVoitures, 3); 
+      break;
+      case 1 : //P3 -> 1h
+      for(int i = 0; i < 20; i++){
+        int pid = fork();
+        if (pid < 0) {
+          perror("ça forke pas\n");
+          return -1;
+        }
+        else if (pid == 0) {
+          srand(getpid());
+          essaisEtQualifications(tabVoitures, i, 3600);
         }
       }
       fonctionPere(tabVoitures, 1);
