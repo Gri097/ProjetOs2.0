@@ -109,19 +109,19 @@ void afficheTab(struct MemoirePartagee *tabVoitures, int choix){
   if (choix < 4) {
     choix = 20;
   }
-  printf("|_________________________________|\n");
-  printf("| Voiture |   Tour    | Pit | Out |\n");
-  printf("|---------|-----------|-----|-----|\n");
+  printf("|___________________________________________________________________________|\n");
+  printf("| Voiture |   Tour    |  Secteur 1  |  Secteur 2  |  Secteur 3  | Pit | Out |\n");
+  printf("|---------|-----------|-------------|-------------|-------------|-----|-----|\n");
   if(finale == 1){
     for(int i = 0; i < choix; i++){
-      printf("|   %2d    |   %.3f\"  |  %d |  %d |\n", mem.tableauV[i].numero, (mem.tableauV[i].nbTour), mem.tableauV[i].pit, mem.tableauV[i].out);
-      printf("|---------|-----------|-----|-----|\n");
+      printf("|   %2d    |   %.3f\" |   %.3f\"  |   %.3f\"  |   %.3f\"  |  %d |  %d |\n", mem.tableauV[i].numero, (mem.tableauV[i].nbTour), mem.tableauV[i].pit, mem.tableauV[i].out);
+      printf("|----------|----------|-----------|-----------|-----------|-----|-----|\n");
     }
   }
   else{
     for(int i = 0; i < choix; i++){
-      printf("|   %2d    |   %.3f\"  |  %d |  %d |\n", mem.tableauV[i].numero, mem.tableauV[i].best[3], mem.tableauV[i].pit, mem.tableauV[i].out);
-      printf("|---------|-----------|-----|-----|\n");
+      printf("|   %2d    |   %.3f\" |   %.3f\"  |   %.3f\"  |   %.3f\"  |  %d |  %d |\n", mem.tableauV[i].numero, mem.tableauV[i].best[3], mem.tableauV[i].pit, mem.tableauV[i].out);
+      printf("|----------|----------|-----------|-----------|-----------|-----|-----|\n");
     }
   }
 
