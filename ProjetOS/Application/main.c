@@ -196,6 +196,11 @@ int main(int argc, char *argv[]){
   tabVoitures = shmat(shmid, NULL, 0);
   int choix = 0;
 
+  printf("Quelle est la taille du circuit ? (en km (int))");
+  int tailleCircuit;
+  scanf("%d", &tailleCircuit);
+  tabVoitures->nbTourAFaire = calculNbTour(tailleCircuit);
+
   while(choix != 10){
     tabVoitures->nbVoituresFini = 0;
 
@@ -296,10 +301,6 @@ int main(int argc, char *argv[]){
       fonctionPere(tabVoitures, 10);
       break;
       case 5 :
-      printf("Quelle est la taille du circuit ? (en km (int))");
-      int tailleCircuit;
-      scanf("%d", &tailleCircuit);
-      tabVoitures->nbTourAFaire = calculNbTour(tailleCircuit);
       for(int i = 0; i < 20; i++){
         int pid = fork();
         if (pid < 0) {
