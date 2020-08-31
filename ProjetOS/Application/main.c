@@ -21,6 +21,7 @@ double calculTour(struct Voiture *v){
       }
       tour += section;
       msleep(section);
+      v->sections[i] = section;
       v->nbTour += 1;
       v->best[i] = meilleurTemps(section, v->best[i]);
     }
@@ -114,13 +115,13 @@ void afficheTab(struct MemoirePartagee *tabVoitures, int choix){
   printf("|---------|-----------|-------------|-------------|-------------|-----|-----|\n");
   if(finale == 1){
     for(int i = 0; i < choix; i++){
-      printf("|   %2d    |   %.3f\" |   %.3f\"  |   %.3f\"  |   %.3f\"  |  %d |  %d |\n", mem.tableauV[i].numero, (mem.tableauV[i].nbTour), mem.tableauV[i].pit, mem.tableauV[i].out);
+      printf("|   %2d    |   %.3f\" |   %.3f\"  |   %.3f\"  |   %.3f\"  |  %d |  %d |\n", mem.tableauV[i].numero, (mem.tableauV[i].nbTour), mem.tableauV[i].sections[0], mem.tableauV[i].sections[1], mem.tableauV[i].sections[2], mem.tableauV[i].pit, mem.tableauV[i].out);
       printf("|----------|----------|-----------|-----------|-----------|-----|-----|\n");
     }
   }
   else{
     for(int i = 0; i < choix; i++){
-      printf("|   %2d    |   %.3f\" |   %.3f\"  |   %.3f\"  |   %.3f\"  |  %d |  %d |\n", mem.tableauV[i].numero, mem.tableauV[i].best[3], mem.tableauV[i].pit, mem.tableauV[i].out);
+      printf("|   %2d    |   %.3f\" |   %.3f\"  |   %.3f\"  |   %.3f\"  |  %d |  %d |\n", mem.tableauV[i].numero, mem.tableauV[i].best[3],mem.tableauV[i].sections[1], mem.tableauV[i].sections[2], mem.tableauV[i].pit, mem.tableauV[i].out);
       printf("|----------|----------|-----------|-----------|-----------|-----|-----|\n");
     }
   }
