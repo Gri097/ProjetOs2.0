@@ -19,7 +19,8 @@ struct Voiture{
   int pit;
   int out;
   double best[4];
-  double nbTour;;
+  double nbTour;
+  double sections[3]; 
 };
 
 //Structure de la mémoire partagée.
