@@ -121,7 +121,7 @@ void afficheTab(struct MemoirePartagee *tabVoitures, int choix){
   }
   else{
     for(int i = 0; i < choix; i++){
-      printf("|   %2d    |   %.3f\" |   %.3f\"  |   %.3f\"  |   %.3f\"  |  %d |  %d |\n", mem.tableauV[i].numero, mem.tableauV[i].best[3],mem.tableauV[i].sections[1], mem.tableauV[i].sections[2], mem.tableauV[i].pit, mem.tableauV[i].out);
+      printf("|   %2d    |   %.3f\" |   %.3f\"  |   %.3f\"  |   %.3f\"  |  %d |  %d |\n", mem.tableauV[i].numero, mem.tableauV[i].best[3], mem.tableauV[i].sections[0],mem.tableauV[i].sections[1], mem.tableauV[i].sections[2], mem.tableauV[i].pit, mem.tableauV[i].out);
       printf("|----------|----------|-----------|-----------|-----------|-----|-----|\n");
     }
   }
