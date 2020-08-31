@@ -35,8 +35,10 @@ void courseFinale(struct MemoirePartagee *tabVoitures, int i){
   struct Voiture v = tabVoitures->tableauV[i];
   initVarVoiture(&v);
   v.nbTour= 0;
-  sleep(i);
+  sleep(1);
+  
   while (v.nbTour < tabVoitures->nbTourAFaire && v.out) {
+    
     calculTour(&v);
     tabVoitures->tableauV[i] = v;
     msleep(500);
@@ -62,10 +64,10 @@ void essaisEtQualifications(struct MemoirePartagee *tabVoitures, int i, double t
     tempsEnCours += calculTour(pointeurV);
     tabVoitures->tableauV[i] = v;
     if (tempsTotal == 5400 || tempsTotal == 3600) {
-	sleep(1);
+	sleep(1.5);
     }
     else{
-	sleep(2);
+	sleep(1.5);
     }
   }
   tabVoitures->nbVoituresFini += 1;
@@ -116,7 +118,7 @@ void afficheTab(struct MemoirePartagee *tabVoitures, int choix){
   printf("|----------|-------------|------------------|--------------|--------------|--------------|------|------|\n");
   if(finale == 1){ //------------AFFICHE LA FINALE-------------------------
     for(int i = 0; i < choix; i++){
-      printf("|   %2d      |   %.3f\" |    %.3f\"   |    %.3f\"   |    %.3f\"   |   %d  |   %d  |\n", mem.tableauV[i].numero, mem.tableauV[i].nbTour, mem.tableauV[i].sections[0], mem.tableauV[i].sections[1], mem.tableauV[i].sections[2], mem.tableauV[i].pit, mem.tableauV[i].out);
+      printf("|   %2d     | %.3f\"     |     %.3f\" |     %.3f\"   |     %.3f\"   |    %.3f\"    |   %d  |   %d  |\n", mem.tableauV[i].numero,mem.tableauV[i].nbTour, mem.tableauV[i].nbTour, mem.tableauV[i].sections[0], mem.tableauV[i].sections[1], mem.tableauV[i].sections[2], mem.tableauV[i].pit, mem.tableauV[i].out);
       printf("|----------|------------|--------------|--------------|--------------|------|------|\n");
     }
   }
