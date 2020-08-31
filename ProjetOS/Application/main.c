@@ -113,19 +113,19 @@ void afficheTab(struct MemoirePartagee *tabVoitures, int choix){
   if (choix < 4) {
     choix = 20;
   }
-  printf("|______________________________________________________________________________________________________|\n");
-  printf("| Voiture  | Best Tour   |  Tour Actuel     |   Section 1  |   Section 2  |   Section 3  |  Pit |  Out |\n");
-  printf("|----------|-------------|------------------|--------------|--------------|--------------|------|------|\n");
+        printf("|________________________________________________________________________________________________________|\n");
+  	printf("| Voiture  | Best Tour   |  Tour Actuel     |   Section 1  |   Section 2  |   Section 3  |  Pit  |  Out  |\n");
+  	printf("|----------|-------------|------------------|--------------|--------------|--------------|-------|-------|\n");
   if(finale == 1){ //------------AFFICHE LA FINALE-------------------------
     for(int i = 0; i < choix; i++){
-      printf("|   %2d     | %.3f\"     |     %.3f\" |     %.3f\"   |     %.3f\"   |    %.3f\"    |   %d  |   %d  |\n", mem.tableauV[i].numero,mem.tableauV[i].nbTour, mem.tableauV[i].nbTour, mem.tableauV[i].sections[0], mem.tableauV[i].sections[1], mem.tableauV[i].sections[2], mem.tableauV[i].pit, mem.tableauV[i].out);
-      printf("|----------|------------|--------------|--------------|--------------|------|------|\n");
+        printf("|   %2d    |   %.3f\"    |        %.3f\"    |     %.3f\"   |     %.3f\"   |    %.3f\"    |   %d  |   %d  |\n", mem.tableauV[i].numero,mem.tableauV[i].nbTour, mem.tableauV[i].nbTour, mem.tableauV[i].sections[0], mem.tableauV[i].sections[1], mem.tableauV[i].sections[2], mem.tableauV[i].pit, mem.tableauV[i].out);
+        printf("|----------|-------------|------------------|--------------|--------------|--------------|-------|-------|\n");
     }
   }
   else{ //----------------------AFFICHE LES QUALS/ESSAIS--------------
     for(int i = 0; i < choix; i++){
-      printf("|   %2d     | %.3f\"     |     %.3f\" |     %.3f\"   |     %.3f\"   |    %.3f\"    |   %d  |   %d  |\n", mem.tableauV[i].numero,mem.tableauV[i].best[3], mem.tableauV[i].tourActuel, mem.tableauV[i].sections[0],mem.tableauV[i].sections[1], mem.tableauV[i].sections[2], mem.tableauV[i].pit, mem.tableauV[i].out);
-      printf("|-----------|------------|------------|--------------|--------------|--------------|-------|-------|\n");
+        printf("|   %2d    |    %.3f\"   |     %.3f\"       |     %.3f\"   |     %.3f\"   |    %.3f\"    |   %d  |   %d  |\n", mem.tableauV[i].numero,mem.tableauV[i].best[3], mem.tableauV[i].tourActuel, mem.tableauV[i].sections[0],mem.tableauV[i].sections[1], mem.tableauV[i].sections[2], mem.tableauV[i].pit, mem.tableauV[i].out);
+        printf("|----------|-------------|------------------|--------------|--------------|--------------|-------|-------|\n");
     }
   }
 
