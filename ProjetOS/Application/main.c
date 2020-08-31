@@ -33,15 +33,19 @@ double calculTour(struct Voiture *v){
 
 void courseFinale(struct MemoirePartagee *tabVoitures, int i){
   struct Voiture v = tabVoitures->tableauV[i];
-  initVarVoiture(&v);
+  struct Voiture *pointeurV = &v;
+  initVarVoiture(pointeurV);
+
+
   v.nbTour= 0;
+
   sleep(1);
   
-  while (v.nbTour < tabVoitures->nbTourAFaire && v.out) {
+  while (v.nbTour < tabVoitures->nbTourAFaire && v.out == 0) { //tabVoitures->nbTourAFaire
     
-    calculTour(&v);
+    calculTour(pointeurV);
     tabVoitures->tableauV[i] = v;
-    msleep(500);
+    msleep(1000);
   }
   tabVoitures->nbVoituresFini += 1;
   exit(0);
@@ -86,48 +90,55 @@ void afficheTab(struct MemoirePartagee *tabVoitures, int choix){
     triVoiture(pointeurMem->tableauV, 3);
   }
   system("clear");
-  printf("____________________________________________________________________________________\n");
+  printf("__________________________________________________________________________________________________________\n");
   switch (choix) {
     case 0:
-    printf("|                              ESSAIS 1                                            |\n");
+    printf("|                                             ESSAIS 1                               		         |\n");
     break;
     case 3:
-    printf("|                              ESSAIS 2                                            |\n");
+    printf("|                                             ESSAIS 2                               		         |\n");
     break;
     case 1:
-    printf("|                              ESSAIS 3                                            |\n");
+    printf("|                                             ESSAIS 3                               		         |\n");
     break;
     case 20:
-    printf("|                          QUALIFICATIONS 1                                        |\n");
+    printf("|                                             QUALIFICATIONS 1                 				 |\n");
     break;
     case 15:
-    printf("|                          QUALIFICATIONS 2                                        |\n");
+    printf("|                                             QUALIFICATIONS 2                 				 |\n");
     break;
     case 10:
-    printf("|                          QUALIFICATIONS 3                                        |\n");
-    break;
+    printf("|                                             QUALIFICATIONS 3                 				 |\n");
+    break;	
     case 2:
-    printf("|                           COURSE FINALE                                          |\n");
+    printf("|                                               COURSE FINALE                     			 |\n");
     break;
   }
   if (choix < 4) {
     choix = 20;
   }
-        printf("|________________________________________________________________________________________________________|\n");
-  	printf("| Voiture  | Best Tour   |  Tour Actuel     |   Section 1  |   Section 2  |   Section 3  |  Pit  |  Out  |\n");
-  	printf("|----------|-------------|------------------|--------------|--------------|--------------|-------|-------|\n");
+        
   if(finale == 1){ //------------AFFICHE LA FINALE-------------------------
+	printf("|________________________________________________________________________________________________________|\n");
+  	printf("| Voiture  | Best Tour   |  Tour Actuel     |   Section 1  |   Section 2  |   Section 3  |  Pit  |  Out  | Nb de tour|\n");
+  	printf("|----------|-------------|------------------|--------------|--------------|--------------|-------|-------|-----------|\n");
     for(int i = 0; i < choix; i++){
-        printf("|   %2d    |   %.3f\"    |        %.3f\"    |     %.3f\"   |     %.3f\"   |    %.3f\"    |   %d  |   %d  |\n", mem.tableauV[i].numero,mem.tableauV[i].nbTour, mem.tableauV[i].nbTour, mem.tableauV[i].sections[0], mem.tableauV[i].sections[1], mem.tableauV[i].sections[2], mem.tableauV[i].pit, mem.tableauV[i].out);
-        printf("|----------|-------------|------------------|--------------|--------------|--------------|-------|-------|\n");
+        printf("|   %2d     |  %.3f\"   |      %.3f\"    |    %.3f\"   |    %.3f\"   |   %.3f\"    |   %d   |  %d    |   %2.0f      |\n", mem.tableauV[i].numero, mem.tableauV[i].best[3], mem.tableauV[i].tourActuel, mem.tableauV[i].sections[0], mem.tableauV[i].sections[1], mem.tableauV[i].sections[2], mem.tableauV[i].pit, mem.tableauV[i].out, mem.tableauV[i].nbTour);
+        printf("|----------|-------------|------------------|--------------|--------------|--------------|-------|-------|-----------|\n");
     }
   }
   else{ //----------------------AFFICHE LES QUALS/ESSAIS--------------
+	printf("|________________________________________________________________________________________________________|\n");
+  	printf("| Voiture  | Best Tour   |  Tour Actuel     |   Section 1  |   Section 2  |   Section 3  |  Pit  |  Out  |\n");
+  	printf("|----------|-------------|------------------|--------------|--------------|--------------|-------|-------|\n");
     for(int i = 0; i < choix; i++){
-        printf("|   %2d    |    %.3f\"   |     %.3f\"       |     %.3f\"   |     %.3f\"   |    %.3f\"    |   %d  |   %d  |\n", mem.tableauV[i].numero,mem.tableauV[i].best[3], mem.tableauV[i].tourActuel, mem.tableauV[i].sections[0],mem.tableauV[i].sections[1], mem.tableauV[i].sections[2], mem.tableauV[i].pit, mem.tableauV[i].out);
+        printf("|   %2d     |  %.3f\"   |    %3.3f\"      |     %2.3f\"  |     %2.3f\"  |    %2.3f\"   |   %d   |   %d   |\n", mem.tableauV[i].numero,mem.tableauV[i].best[3], mem.tableauV[i].tourActuel, mem.tableauV[i].sections[0],mem.tableauV[i].sections[1], mem.tableauV[i].sections[2], mem.tableauV[i].pit, mem.tableauV[i].out);
         printf("|----------|-------------|------------------|--------------|--------------|--------------|-------|-------|\n");
     }
   }
+  printf("__________________________________________________________________________________________________________\n");
+  printf("|                                             Best                                   		         |\n");
+  printf("|________________________________________________________________________________________________________|\n");
 
   printf("|  Best    | Section 1    |\n");
   printf("|----------|--------------|\n");
@@ -203,7 +214,9 @@ int main(int argc, char *argv[]){
   printf("Quelle est la taille du circuit ? (en km (int))");
   int tailleCircuit;
   scanf("%d", &tailleCircuit);
+
   tabVoitures->nbTourAFaire = calculNbTour(tailleCircuit);
+	//printf("test: %d", tabVoitures->nbTourAFaire); //Nombre de tour à faire
 
   while(choix != 10){
     tabVoitures->nbVoituresFini = 0;
