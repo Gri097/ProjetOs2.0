@@ -21,6 +21,7 @@ struct Voiture{
   double best[4];
   double nbTour;
   double sections[3]; 
+  double tourActuel;
 };
 
 //Structure de la mémoire partagée.
