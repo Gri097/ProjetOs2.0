@@ -179,7 +179,7 @@ void docRecap(struct MemoirePartagee *tabVoitures, int choix){
         fprintf(fichier,"|---------|-----------|-----|-----|\n");
         if(finale == 1){
           for(int i = 0; i < choix; i++){
-            fprintf(fichier,"|   %2d    |   %.3f\"  |  %d |  %d |\n", mem.tableauV[i].numero, (mem.tableauV[i].nbTour), mem.tableauV[i].pit, mem.tableauV[i].out);
+            fprintf(fichier,"|   %2d    |   %2.0f      |  %d  |  %d  |\n", mem.tableauV[i].numero, (mem.tableauV[i].nbTour), mem.tableauV[i].pit, mem.tableauV[i].out);
             fprintf(fichier,"----------------------------------|\n");
           }
         }
